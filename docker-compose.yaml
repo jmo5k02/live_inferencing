@@ -1,0 +1,18 @@
+
+services:
+  live_inference_web:
+    build: src
+    command: python main.py
+    ports:
+      - "5500:5500"
+    devices:
+      - "/dev/video0:/dev/video0"
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    
